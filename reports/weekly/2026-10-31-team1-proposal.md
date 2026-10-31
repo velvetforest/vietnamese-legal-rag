@@ -26,7 +26,8 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 ### [x] T4. VLRA-48 Pipeline đánh giá Retrieval
 - **File dự kiến:** `scripts/eval_retrieval.py` (Recall@10, MRR@20, adapter hybrid), `evaluation/README.md`, `tests/test_eval_retrieval.py`. **Ước lượng:** M
 - **Kết quả:** DONE VLRA-48 (commit `2bbb7a3`), test 461 → 466 passed.
-### [ ] T5. VLRA-49 Đánh giá BM25 / Dense / Hybrid (Recall@5/10/20, MRR@20) — phụ thuộc T4. **Ước lượng:** M
+### [x] T5. VLRA-49 Đánh giá BM25 / Dense / Hybrid (Recall@5/10/20, MRR@20) — phụ thuộc T4. **Ước lượng:** M
+- **Kết quả:** DONE VLRA-49 (commit `148a6ee`): Hybrid k=60 R@5 0.876 / MRR@20 0.829 > BM25 0.863 / 0.814 > Dense-LSA 0.852 / 0.757. Dense dùng LSA offline (HF 403).
 ### [ ] T6. VLRA-50 Chunk size 384/512 × overlap 32/64 — phụ thuộc T4. **Ước lượng:** M
 ### [ ] T7. VLRA-51 RRF k (cơ sở k=60) — phụ thuộc T5. **Ước lượng:** S
 ### [ ] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
