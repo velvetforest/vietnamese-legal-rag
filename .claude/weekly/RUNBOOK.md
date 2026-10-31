@@ -15,7 +15,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Tin nhắn trả lời chủ repo ≤ 10 dòng; chi tiết nằm trong file.
 - Viết tiếng Việt. Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
 
-## Pha A – Tóm tắt + đánh giá + đề xuất (KHÔNG ghi gì lên Jira, KHÔNG sửa code)
+## Pha A – Tóm tắt + đánh giá + đề xuất (KHÔNG ghi gì lên Jira; chỉ sửa code qua Pha B tự động ở bước 7)
 1. `bash scripts/weekly/prepare.sh` → lấy `WEEKLY_DIR` (mặc định `../weekly-reports`) và đọc STATE.
 2. `python3 scripts/weekly/git_digest.py --state $WEEKLY_DIR/reports/weekly/STATE.json` → ghi nhớ `HEAD_SHA` và `BRANCH_SHAS`.
    Output gồm nhánh chính + các nhánh team/develop có commit mới chưa vào nhánh chính; bảng 1 phải gộp cả hai, ghi rõ nhánh.
@@ -41,8 +41,21 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
    Chỉ đề xuất task Claude tự làm & tự test được trong repo.
 6. Cập nhật STATE: `last_sha=HEAD_SHA`, `branch_shas=BRANCH_SHAS`, `last_run=D`, `status="waiting_approval"`, `pending_proposal="reports/weekly/D-team1-proposal.md"`.
    Commit trong `$WEEKLY_DIR` (`docs(weekly): báo cáo D`) và `git -C $WEEKLY_DIR push -u origin <reports_branch>`.
-7. Trả lời chủ repo: đường dẫn 2 file, 3 điểm nổi bật nhất, danh sách T1..Tn (1 dòng/task), và hướng dẫn:
+7. Nếu proposal có task **sửa lỗi của Team 1** → chạy ngay **Pha B tự động** (bên dưới), không hỏi.
+8. Trả lời chủ repo: đường dẫn 2 file, 3 điểm nổi bật nhất, lỗi Team 1 đã tự sửa (nếu có), danh sách T1..Tn còn chờ (1 dòng/task), và hướng dẫn:
    `duyệt 1,3` · `bỏ 2` · `sửa 2: <ý kiến>`. Rồi DỪNG, chờ.
+
+## Pha B tự động – sửa lỗi Team 1 (không cần duyệt)
+- Phạm vi: chỉ task là **sửa lỗi** (bug, test đỏ, sai kiểu/contract) trong code Team 1 (`teams["Team 1"]`) + test liên quan.
+  Task khác (tính năng mới, chạy eval, refactor, chỉ thêm test) vẫn chờ duyệt như cũ.
+- Trước khi sửa: kiểm tra lỗi còn trên nhánh đích `T = pr_targets["Team 1"]`. Đã được sửa trên `T` thì chỉ thêm test hồi quy nếu thiếu;
+  không còn gì để làm thì ghi "đã sửa sẵn trên T" và bỏ qua.
+- Làm theo Pha B bước 3–6 (KHÔNG ghi Jira); cổng test giữ nguyên: không được có lỗi test mới.
+- Push nhánh `claude/weekly-team1-D` lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở.
+- Ghi chú giải pháp ở 2 nơi: `docs/weekly-changes/D.md` trên nhánh code, và mục `## 3. Đã tự sửa` trong báo cáo `D.md`
+  (lỗi · nguyên nhân · giải pháp · file · test trước–sau · link nhánh). Đánh dấu task đó `[x]` trong proposal.
+- STATE: `status` giữ `waiting_approval` nếu còn task chờ duyệt, ngược lại `done`; `last_pr` = link compare. Commit + push nhánh báo cáo.
+- Giới hạn: tối đa 2 lỗi mỗi lần chạy, mỗi lỗi tự sửa ≤ 2 lần; vượt giới hạn hoặc cổng test không qua → không push code, ghi lý do vào báo cáo.
 
 ## Pha B – Làm task đã duyệt
 1. `bash scripts/weekly/prepare.sh`; chỉ đọc file `pending_proposal` (không đọc lại báo cáo).
@@ -64,6 +77,6 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 9. Trả lời ≤ 8 dòng: link PR, task nào xong/không xong, test trước–sau.
 
 ## Cấm
-- Ghi Jira hoặc sửa code trước khi được duyệt. Push thẳng vào `main`. Tự merge PR.
+- Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ duy nhất: Pha B tự động sửa lỗi Team 1, không ghi Jira). Push thẳng vào `main`. Tự merge PR.
 - Skip/xoá/đánh dấu xfail test để qua cổng test.
 - In secret (JIRA_API_TOKEN…) ra file hoặc chat.

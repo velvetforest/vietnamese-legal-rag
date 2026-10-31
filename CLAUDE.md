@@ -71,6 +71,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 Kiến trúc: `docs/ARCHITECTURE.md` · Quy ước code: `docs/CODING_CONVENTIONS.md` (chỉ đọc khi cần).
 
 ## Lệnh tắt của chủ repo
-- Tin nhắn chỉ gồm `s` (hoặc `start`) → chạy **Pha A** trong `.claude/weekly/RUNBOOK.md` ngay, không hỏi lại.
+- Tin nhắn chỉ gồm `s` (hoặc `start`) → chạy **Pha A** trong `.claude/weekly/RUNBOOK.md` ngay, không hỏi lại
+  (gồm cả Pha B tự động: lỗi của Team 1 tự sửa luôn, ghi chú giải pháp, không mở PR).
 - Tin nhắn bắt đầu bằng `duyệt` / `bỏ` / `sửa` khi STATE đang `waiting_approval` → chạy **Pha B** trong RUNBOOK.
 - Chỉ đọc những file RUNBOOK chỉ định để tiết kiệm token.
