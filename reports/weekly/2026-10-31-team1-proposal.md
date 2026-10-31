@@ -23,8 +23,9 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Tiêu chí xong:** ≥ 100 câu, mỗi câu có `gold_chunk_ids` + Điều/Khoản nguồn + đáp án trích nguyên văn chunk; không bịa nội dung. **Ước lượng:** L
 - **Kết quả:** DONE VLRA-36 (commit `7a61fbd`): 110 câu, test 456 → 461 passed. 70 câu mới cần rà soát pháp lý cách hỏi.
 
-### [ ] T4. VLRA-48 Pipeline đánh giá Retrieval
+### [x] T4. VLRA-48 Pipeline đánh giá Retrieval
 - **File dự kiến:** `scripts/eval_retrieval.py` (Recall@10, MRR@20, adapter hybrid), `evaluation/README.md`, `tests/test_eval_retrieval.py`. **Ước lượng:** M
+- **Kết quả:** DONE VLRA-48 (commit `2bbb7a3`), test 461 → 466 passed.
 ### [ ] T5. VLRA-49 Đánh giá BM25 / Dense / Hybrid (Recall@5/10/20, MRR@20) — phụ thuộc T4. **Ước lượng:** M
 ### [ ] T6. VLRA-50 Chunk size 384/512 × overlap 32/64 — phụ thuộc T4. **Ước lượng:** M
 ### [ ] T7. VLRA-51 RRF k (cơ sở k=60) — phụ thuộc T5. **Ước lượng:** S
