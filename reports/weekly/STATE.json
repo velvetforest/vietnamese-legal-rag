@@ -1,7 +1,7 @@
 {
   "last_sha": "ae729ae93eeedfc62f014846d19a68e03fa2387b",
   "last_run": "2026-10-31",
-  "status": "waiting_approval",
+  "status": "in_progress",
   "pending_proposal": "reports/weekly/2026-10-31-team1-proposal.md",
   "last_pr": "https://github.com/Banh-Van-Hiep/vietnamese-legal-rag/compare/develop...velvetforest:vietnamese-legal-rag:claude/weekly-team1-2026-10-31?expand=1",
   "branch_shas": {

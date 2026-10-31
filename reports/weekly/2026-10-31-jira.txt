@@ -1,53 +1,52 @@
-## Team 1 (14 issue)
-key | trạng thái | người làm | SP | hạn | cập nhật | tiêu đề
-VLRA-34 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-27 | [Team 1] Tích hợp & hoàn thiện Retrieval Pipeline v1 (BM25 + Dense + RRF)
-VLRA-29 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-21 | Kiểm thử Dense và Hybrid Retrieval (team suy từ SP)
-VLRA-28 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-21 | Kiểm thử BM25 Retrieval (team suy từ SP)
-VLRA-27 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-19 | Xây dựng Hybrid Retrieval bằng RRF (team suy từ SP)
-VLRA-26 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-17 | Xây dựng Dense Retrieval + Embedding + Vector DB (team suy từ SP)
-VLRA-37 | In Progress | CHƯA GIAO | - | 2026-10-25 | 2026-10-31 | [Team 1] Phối hợp kiểm thử luồng truy xuất dữ liệu trong E2E MVP Pipeline
-VLRA-35 | In Progress | CHƯA GIAO | - | 2026-10-25 | 2026-10-31 | [Team 1] Sửa lỗi và chuẩn hóa chunk_id/metadata giữa Retrieval và Reranker
-VLRA-53 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Lựa chọn cấu hình Retrieval tốt nhất
-VLRA-52 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Đánh giá các mô hình Embedding
-VLRA-51 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Thử nghiệm và tối ưu cấu hình Hybrid RRF (k)
-VLRA-50 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Thử nghiệm Chunk Size và Overlap
-VLRA-49 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Đánh giá các chỉ số Retrieval
-VLRA-48 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Xây dựng pipeline đánh giá Retrieval
-VLRA-36 | To Do | CHƯA GIAO | - | 2026-10-25 | 2026-10-19 | [Team 1] Phụ trách hoàn thiện toàn bộ Golden Dataset Phase 1 (100–150 câu)
+## Team 1 (13 issue)
+key | trạng thái | sprint | người làm | SP | hạn | cập nhật | tiêu đề
+VLRA-34 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-27 | [Team 1] Tích hợp & hoàn thiện Retrieval Pipeline v1 (BM25 + Dense + RRF)
+VLRA-29 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-21 | Kiểm thử Dense và Hybrid Retrieval (team suy từ SP)
+VLRA-28 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-21 | Kiểm thử BM25 Retrieval (team suy từ SP)
+VLRA-27 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-19 | Xây dựng Hybrid Retrieval bằng RRF (team suy từ SP)
+VLRA-37 | In Progress | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-31 | [Team 1] Phối hợp kiểm thử luồng truy xuất dữ liệu trong E2E MVP Pipeline
+VLRA-35 | In Progress | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-31 | [Team 1] Sửa lỗi và chuẩn hóa chunk_id/metadata giữa Retrieval và Reranker
+VLRA-53 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Lựa chọn cấu hình Retrieval tốt nhất
+VLRA-52 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Đánh giá các mô hình Embedding
+VLRA-51 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Thử nghiệm và tối ưu cấu hình Hybrid RRF (k)
+VLRA-50 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Thử nghiệm Chunk Size và Overlap
+VLRA-49 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Đánh giá các chỉ số Retrieval
+VLRA-48 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team1-Xây dựng pipeline đánh giá Retrieval
+VLRA-36 | To Do | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-19 | [Team 1] Phụ trách hoàn thiện toàn bộ Golden Dataset Phase 1 (100–150 câu)
 ## Team 2 (14 issue)
-key | trạng thái | người làm | SP | hạn | cập nhật | tiêu đề
-VLRA-47 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 2 / Team 3] Thống nhất & Xử lý Error Codes/Exceptions giữa RAG Service và Backend(Team 2 chịu trách nhiệm chính, Team 3 rà soát)
-VLRA-46 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Thiết lập Cấu hình LLM Provider, API Key & Context Window Config
-VLRA-45 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Xây dựng Python FastAPI Service cho RAG Pipeline (POST /internal/v1/query)
-VLRA-39 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Chuẩn hóa định dạng JSON Response cho Answer + Citation
-VLRA-32 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Kiểm thử Reranker và LLM Generation (team suy từ SP)
-VLRA-31 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Tích hợp Context → LLM → Answer + chunk_id (team suy từ SP)
-VLRA-30 | Done | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Xây dựng Reranker Prototype (team suy từ SP)
-VLRA-40 | In Progress | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Kiểm thử độ chính xác của câu trả lời và trích dẫn (Answer/Citation Test)
-VLRA-38 | In Progress | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Tích hợp Reranker + Context Builder + LLM Generation
-VLRA-58 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Đề xuất cấu hình RAG tối ưu
-VLRA-57 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Tối ưu Reranker và Context Builder
-VLRA-56 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Phân tích lỗi Retrieval
-VLRA-55 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Phân tích ảnh hưởng của Reranker
-VLRA-54 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Đánh giá Hybrid Retrieval và Hybrid kết hợp Reranker
+key | trạng thái | sprint | người làm | SP | hạn | cập nhật | tiêu đề
+VLRA-47 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 2 / Team 3] Thống nhất & Xử lý Error Codes/Exceptions giữa RAG Service và Backend(Team 2 chịu trách nhiệm chính, Team 3 rà soát)
+VLRA-46 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Thiết lập Cấu hình LLM Provider, API Key & Context Window Config
+VLRA-45 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Xây dựng Python FastAPI Service cho RAG Pipeline (POST /internal/v1/query)
+VLRA-39 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Chuẩn hóa định dạng JSON Response cho Answer + Citation
+VLRA-32 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Kiểm thử Reranker và LLM Generation (team suy từ SP)
+VLRA-31 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Tích hợp Context → LLM → Answer + chunk_id (team suy từ SP)
+VLRA-30 | Done | VLRA Sprint 3(active) | CHƯA GIAO | - | 2026-10-19 | 2026-10-18 | Xây dựng Reranker Prototype (team suy từ SP)
+VLRA-40 | In Progress | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Kiểm thử độ chính xác của câu trả lời và trích dẫn (Answer/Citation Test)
+VLRA-38 | In Progress | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-25 | [Team 2] Tích hợp Reranker + Context Builder + LLM Generation
+VLRA-58 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Đề xuất cấu hình RAG tối ưu
+VLRA-57 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Tối ưu Reranker và Context Builder
+VLRA-56 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Phân tích lỗi Retrieval
+VLRA-55 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Phân tích ảnh hưởng của Reranker
+VLRA-54 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-27 | team2-Đánh giá Hybrid Retrieval và Hybrid kết hợp Reranker
 ## Team 3 (10 issue)
-key | trạng thái | người làm | SP | hạn | cập nhật | tiêu đề
-VLRA-47 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 2 / Team 3] Thống nhất & Xử lý Error Codes/Exceptions giữa RAG Service và Backend(Team 2 chịu trách nhiệm chính, Team 3 rà soát)
-VLRA-44 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Kiểm thử toàn bộ giao diện người dùng End-to-End (E2E MVP Interface)
-VLRA-43 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-24 | [Team 3] Thiết kế UI hiển thị câu trả lời và các thẻ trích dẫn (Answer + Citation UI)
-VLRA-42 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Tích hợp kết nối hai chiều Frontend ↔ Backend API
-VLRA-41 | Done | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Xây dựng API Endpoint POST /api/v1/chat/stream kết nối RAG Pipeline (SSE)
-VLRA-63 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Kiểm thử tích hợp Backend với Retrieval v2
-VLRA-62 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Tích hợp Retrieval v2 vào Backend
-VLRA-61 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Đo thời gian phản hồi của các cấu hình Retrieval
-VLRA-60 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Kiểm tra tính tương thích của API Contract
-VLRA-59 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Hỗ trợ đánh giá Retrieval qua Backend/API
+key | trạng thái | sprint | người làm | SP | hạn | cập nhật | tiêu đề
+VLRA-47 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 2 / Team 3] Thống nhất & Xử lý Error Codes/Exceptions giữa RAG Service và Backend(Team 2 chịu trách nhiệm chính, Team 3 rà soát)
+VLRA-44 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Kiểm thử toàn bộ giao diện người dùng End-to-End (E2E MVP Interface)
+VLRA-43 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-24 | [Team 3] Thiết kế UI hiển thị câu trả lời và các thẻ trích dẫn (Answer + Citation UI)
+VLRA-42 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Tích hợp kết nối hai chiều Frontend ↔ Backend API
+VLRA-41 | Done | VLRA Sprint 4(active) | CHƯA GIAO | - | 2026-10-25 | 2026-10-26 | [Team 3] Xây dựng API Endpoint POST /api/v1/chat/stream kết nối RAG Pipeline (SSE)
+VLRA-63 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Kiểm thử tích hợp Backend với Retrieval v2
+VLRA-62 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Tích hợp Retrieval v2 vào Backend
+VLRA-61 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Đo thời gian phản hồi của các cấu hình Retrieval
+VLRA-60 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Kiểm tra tính tương thích của API Contract
+VLRA-59 | To Do | VLRA Sprint 5(active) | CHƯA GIAO | - | 2026-11-01 | 2026-10-26 | team3-Hỗ trợ đánh giá Retrieval qua Backend/API
 ## Epic (6 issue)
-key | trạng thái | người làm | SP | hạn | cập nhật | tiêu đề
-VLRA-6 | To Do | CHƯA GIAO | - | 2026-11-22 | 2026-09-28 | [EPIC 6] DevOps, Docs & Final Delivery
-VLRA-5 | To Do | CHƯA GIAO | - | 2026-11-15 | 2026-09-28 | [EPIC 5] System Evaluation & Benchmark
-VLRA-4 | To Do | CHƯA GIAO | - | 2026-11-08 | 2026-09-28 | [EPIC 4] Fullstack Web Platform
-VLRA-3 | To Do | CHƯA GIAO | - | 2026-11-01 | 2026-09-28 | [EPIC 3] Core RAG & LLM Engine
-VLRA-2 | To Do | CHƯA GIAO | - | 2026-10-25 | 2026-09-28 | [EPIC 2] Search & Retrieval System
-VLRA-1 | To Do | CHƯA GIAO | - | 2026-10-04 | 2026-09-28 | [EPIC 1] Data Pipeline & Knowledge Base
+key | trạng thái | sprint | người làm | SP | hạn | cập nhật | tiêu đề
+VLRA-6 | To Do |  | CHƯA GIAO | - | 2026-11-22 | 2026-09-28 | [EPIC 6] DevOps, Docs & Final Delivery
+VLRA-5 | To Do |  | CHƯA GIAO | - | 2026-11-15 | 2026-09-28 | [EPIC 5] System Evaluation & Benchmark
+VLRA-4 | To Do |  | CHƯA GIAO | - | 2026-11-08 | 2026-09-28 | [EPIC 4] Fullstack Web Platform
+VLRA-3 | To Do |  | CHƯA GIAO | - | 2026-11-01 | 2026-09-28 | [EPIC 3] Core RAG & LLM Engine
+VLRA-2 | To Do |  | CHƯA GIAO | - | 2026-10-25 | 2026-09-28 | [EPIC 2] Search & Retrieval System
+VLRA-1 | To Do |  | CHƯA GIAO | - | 2026-10-04 | 2026-09-28 | [EPIC 1] Data Pipeline & Knowledge Base
 ## Chưa gắn team (0 issue)
