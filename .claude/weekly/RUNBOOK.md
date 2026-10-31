@@ -37,7 +37,10 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
    ghi key Jira nếu có; ✅ ổn / ⚠️ cần xem / ❌ không ổn; chỉ liệt kê task đáng nói + 1 dòng tổng mỗi team)
    ```
 5. Viết `$WEEKLY_DIR/reports/weekly/D-team1-proposal.md` = danh sách việc Team 1 sẽ TỰ LÀM lần này, lấy từ Jira:
-   các issue của nhóm `Team 1` trong `D-jira.txt` chưa Done (bỏ Epic), ưu tiên quá hạn → hạn gần → priority; tối đa `max_tasks_per_run`.
+   TẤT CẢ issue của nhóm `Team 1` trong `D-jira.txt` chưa Done thuộc sprint đang `active` (cột sprint; bỏ Epic),
+   thứ tự: sprint cũ trước → quá hạn → hạn gần → priority; tối đa `max_tasks_per_run`. Task phụ thuộc nhau (vd pipeline eval → đo chỉ số
+   → chọn cấu hình) làm đúng thứ tự, task sau dùng kết quả task trước.
+   Trước khi lập danh sách, đọc `$WEEKLY_DIR/reports/weekly/NOTES.md` nếu có: dặn dò của chủ repo cho tuần này được ưu tiên hơn RUNBOOK.
    Thêm task sửa lỗi Team 1 phát hiện ở bước 2 (nếu có) lên đầu. Mỗi task:
    `### [ ] T<n>. <KEY Jira> <tiêu đề>` + Lý do · File dự kiến đổi · Tiêu chí xong (test nào chứng minh) · Ước lượng (S/M/L).
    Issue không làm được trong repo (họp, dữ liệu ngoài, cần người quyết) → ghi `[-] bỏ qua: <lý do>`.
@@ -60,7 +63,9 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Ghi chú giải pháp ở 2 nơi: `docs/weekly-changes/D.md` trên nhánh code, và mục `## 3. Team 1 đã tự làm` trong `D.md`
   (task · vấn đề · giải pháp · file · test trước–sau · commit). Đánh dấu `[x]` xong / `[!]` thất bại kèm lý do trong proposal.
 - STATE: `status="done"`, `pending_proposal=null`, `last_pr` = link compare. Commit + push nhánh báo cáo.
-- Giới hạn: `max_tasks_per_run` task mỗi lần chạy; mỗi task tự sửa ≤ 2 lần, quá thì `[!]` và chuyển task sau;
+- Làm lần lượt đến khi hết danh sách. Sau mỗi task: commit + push nhánh code, `done` Jira, cập nhật proposal/báo cáo + push nhánh báo cáo
+  (mất phiên giữa chừng vẫn giữ được kết quả).
+- Giới hạn: `max_tasks_per_run` task mỗi lần chạy, ~250 lần gọi công cụ mỗi phiên; mỗi task tự sửa ≤ 2 lần, quá thì `[!]` và chuyển task sau;
   task làm hỏng test thì revert commit của task đó. Không push code nếu cổng test không qua.
 
 ## Pha B – Làm task đã duyệt (thủ công, khi chủ repo nhắn `duyệt …`)

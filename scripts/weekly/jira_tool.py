@@ -65,7 +65,8 @@ def teams_of(summary: str) -> list[str]:
 def snapshot() -> None:
     """1 truy vấn cho cả project rồi chia team phía client (rẻ hơn 1 truy vấn/team)."""
     sp = CFG.get("story_points_field")
-    fields = list(CFG["fields"]) + ([sp] if sp else [])
+    spr = CFG.get("sprint_field")
+    fields = list(CFG["fields"]) + ([sp] if sp else []) + ([spr] if spr else [])
     jql = (f'project = {CFG["project_key"]} AND (statusCategory != Done OR updated >= -14d) '
            f'ORDER BY status, priority DESC')
     issues, token = [], None
@@ -98,12 +99,13 @@ def snapshot() -> None:
     for team, items in groups.items():
         print(f"## {team} ({len(items)} issue)")
         if items:
-            print("key | trạng thái | người làm | SP | hạn | cập nhật | tiêu đề")
+            print("key | trạng thái | sprint | người làm | SP | hạn | cập nhật | tiêu đề")
         for it in items:
             f = it["fields"]
             print(" | ".join([
                 it["key"],
                 (f.get("status") or {}).get("name", "-"),
+                ",".join(f"{x.get('name')}({x.get('state')})" for x in (f.get(spr) or [])) if spr else "-",
                 (f.get("assignee") or {}).get("displayName", "CHƯA GIAO"),
                 "-" if it.get("_sp_team") or not sp else str(f.get(sp) or "-"),
                 f.get("duedate") or "-",

@@ -31,7 +31,7 @@
   },
   "test_setup": "pip install -q pytest numpy qdrant-client pydantic-settings -e \".[rag,test,retrieval,api]\"",
   "test_cmd": "python3 -m pytest -q -p no:cacheprovider",
-  "max_tasks_per_run": 3,
+  "max_tasks_per_run": 12,
   "jira": {
     "base_url": "https://banhvanhiep.atlassian.net",
     "project_key": "VLRA",
@@ -54,7 +54,8 @@
     "max_issues": 300,
     "team_regex": "(?i)team\\s*[-_]?\\s*(\\d)",
     "epic_regex": "(?i)^\\s*\\[epic",
-    "team_from_story_points": true
+    "team_from_story_points": true,
+    "sprint_field": "customfield_10020"
   },
   "branch_pattern": "team|develop",
   "pr_targets": {
