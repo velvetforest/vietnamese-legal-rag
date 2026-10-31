@@ -1,0 +1,66 @@
+{
+  "base_branch": "main",
+  "upstream_url": "https://github.com/Banh-Van-Hiep/vietnamese-legal-rag.git",
+  "upstream_remote": "upstream",
+  "fork_owner": "velvetforest",
+  "reports_branch": "weekly-reports",
+  "default_since_days": 7,
+  "teams": {
+    "Team 1": [
+      "team1_data",
+      "docs/team1_data"
+    ],
+    "Team 2": [
+      "team2_rag",
+      "docs/team2_rag"
+    ],
+    "Team 3": [
+      "team3_fullstack",
+      "docs/team3_fullstack"
+    ],
+    "Chung": [
+      "tests",
+      "contracts",
+      "specs",
+      "scripts",
+      "configs",
+      "evaluation",
+      "docs/ARCHITECTURE.md",
+      "docs/CODING_CONVENTIONS.md"
+    ]
+  },
+  "test_setup": "pip install -q pytest numpy qdrant-client pydantic-settings -e \".[rag,test,retrieval,api]\"",
+  "test_cmd": "python3 -m pytest -q -p no:cacheprovider",
+  "max_tasks_per_run": 12,
+  "jira": {
+    "base_url": "https://banhvanhiep.atlassian.net",
+    "project_key": "VLRA",
+    "team_by": "summary_regex",
+    "team_values": {
+      "Team 1": "[Team 1]",
+      "Team 2": "[Team 2]",
+      "Team 3": "[Team 3]"
+    },
+    "issue_type": "Task",
+    "story_points_field": "customfield_10016",
+    "fields": [
+      "summary",
+      "status",
+      "assignee",
+      "priority",
+      "duedate",
+      "updated"
+    ],
+    "max_issues": 300,
+    "team_regex": "(?i)team\\s*[-_]?\\s*(\\d)",
+    "epic_regex": "(?i)^\\s*\\[epic",
+    "team_from_story_points": true,
+    "sprint_field": "customfield_10020"
+  },
+  "branch_pattern": "team|develop",
+  "pr_targets": {
+    "Team 1": "develop",
+    "Team 2": "feature/team2-rag",
+    "Team 3": "feature/team3-fullstack"
+  }
+}
