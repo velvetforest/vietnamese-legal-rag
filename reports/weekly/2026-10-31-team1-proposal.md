@@ -32,8 +32,13 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Kết quả:** DONE VLRA-50 (commit `2f81fd6`): chênh lệch không đáng kể (chỉ 14 Khoản > 384 token); đề xuất giữ chunk theo Khoản, cắt 384/64 khi cần.
 ### [x] T7. VLRA-51 RRF k (cơ sở k=60) — phụ thuộc T5. **Ước lượng:** S
 - **Kết quả:** DONE VLRA-51 (commit `f60c9cf`): k ≥ 20 ổn định, giữ k = 60.
-### [!] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
+### [x] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
 - **Kết quả:** [!] làm một phần (commit `4f66fcc`): chỉ so được embedder offline (hash, LSA 128–768; LSA 384 cân bằng nhất). Model thật không tải được (HuggingFace 403) → không chuyển Done.
-### [!] T9. VLRA-53 Chọn cấu hình Retrieval v2 — phụ thuộc T5–T8. **Ước lượng:** S
+### [x] T9. VLRA-53 Chọn cấu hình Retrieval v2 — phụ thuộc T5–T8. **Ước lượng:** S
 - **Kết quả:** [!] làm một phần (commit `5b2fa4b`): chọn Hybrid RRF k=60 + chunk theo Khoản (`retrieval_v2.json`, tương thích API), R@5 0.876 toàn Dev Set nhưng 0.684 nhóm Team 2; embedding chưa chốt do VLRA-52 chưa chạy model thật → không Done.
 - **Bổ sung (`c9d2c14`):** báo cáo 2 tầng + hit@5 / R@5 theo Điều; bộ khó R@5 .684, hit@5 .900.
+
+
+## Cập nhật (chạy model thật, nhánh `feature/team1/vlra52-53-embedding`)
+- **VLRA-52 DONE:** AITeamVN/Vietnamese_Embedding@dea33aa thắng (MRR@20 .950; bộ khó MRR .966, hit@5 .975); bge-m3 MRR .866, e5-small .868. Commit `0bf7af6`, `1a9272d`, `57490ba`.
+- **VLRA-53 DONE:** Retrieval v2 = Hybrid k60, BM25:Dense 0.5:1, AITeamVN; R@5 .912 toàn bộ, .783 bộ khó. Commit `b1891b5`, `24a7b2f`. Test 469 → 470 passed. [compare](https://github.com/Banh-Van-Hiep/vietnamese-legal-rag/compare/develop...velvetforest:vietnamese-legal-rag:feature/team1/vlra52-53-embedding?expand=1)
