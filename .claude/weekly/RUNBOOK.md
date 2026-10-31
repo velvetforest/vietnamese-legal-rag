@@ -15,6 +15,14 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Tin nhắn trả lời chủ repo ≤ 10 dòng; chi tiết nằm trong file.
 - Viết tiếng Việt. Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
 
+## Lịch hằng tuần
+- **Chiều Thứ 5 – Xem chia việc:** Pha A bước 1–4 + mục `## 5. Đề xuất chia lại việc` trong `D.md`
+  (theo team: task sprint active, quá hạn, chưa giao, chồng chéo, task nên chuyển/tách/gộp; mỗi đề xuất 1 dòng + lý do).
+  KHÔNG sửa code, KHÔNG ghi Jira. Push `weekly-reports`, gửi PushNotification hỏi chủ repo, rồi DỪNG.
+  Chủ repo trả lời trong phiên đó → ghi nguyên ý vào `reports/weekly/NOTES.md` (mục `## D`), commit + push `weekly-reports`; không làm việc khác.
+- **Tối Thứ 5 – Làm việc:** nếu `D.md` hôm nay đã có thì bỏ Pha A bước 1–4, đọc `D.md` + `NOTES.md`, chạy bước 5→8 + Pha B tự động.
+  Chủ repo chưa trả lời → vẫn làm theo kế hoạch hiện tại (chỉ task Team 1), ghi "chưa có phản hồi về đề xuất chia việc".
+
 ## Pha A – Tóm tắt + đánh giá + đề xuất (KHÔNG ghi gì lên Jira; code Team 1 làm qua Pha B tự động ở bước 7)
 1. `bash scripts/weekly/prepare.sh` → lấy `WEEKLY_DIR` (mặc định `../weekly-reports`) và đọc STATE.
 2. `python3 scripts/weekly/git_digest.py --state $WEEKLY_DIR/reports/weekly/STATE.json` → ghi nhớ `HEAD_SHA` và `BRANCH_SHAS`.
