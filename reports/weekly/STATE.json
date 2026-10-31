@@ -1,0 +1,17 @@
+{
+  "last_sha": "ae729ae93eeedfc62f014846d19a68e03fa2387b",
+  "last_run": "2026-10-31",
+  "status": "waiting_approval",
+  "pending_proposal": "reports/weekly/2026-10-31-team1-proposal.md",
+  "last_pr": null,
+  "branch_shas": {
+    "feature/team2-rag": "3ffa282ff0b15d5ced11e9f14de57f22ae42ee34",
+    "feature/team3-fullstack": "c62b4b47e5e6716ccde0fb8a42a47ca6c55513a6",
+    "feature/team3/tuan": "c62b4b47e5e6716ccde0fb8a42a47ca6c55513a6",
+    "develop": "eea5604251afd4d8605fed510d6bf4de31d629bb",
+    "feature/team1/retrieval-reranker-fix": "f6c9672750567cf2cafb5d9703d221a79fcd8575",
+    "feature/team2/datdo-api-error-fix": "54980fc125e1dafc4daf5ad45231076abb62e379",
+    "revert-35-feature/team2/datdo-integration-fixes": "92fbb2a68d5bc08e0fa5829b75a340f8ef24e433",
+    "feature/team1/hf-corpus-pilot": "4ac0aaff524a0c52889827e3bc663a307cd058d3"
+  }
+}
