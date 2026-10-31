@@ -3,7 +3,7 @@
 Nguồn: `2026-10-31-jira.txt` (snapshot có cột sprint) — mọi issue Team 1 chưa Done thuộc sprint active (Sprint 4 → Sprint 5).
 Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR —
 [compare](https://github.com/Banh-Van-Hiep/vietnamese-legal-rag/compare/develop...velvetforest:vietnamese-legal-rag:claude/weekly-team1-2026-10-31?expand=1).
-Đề xuất cũ: T1 (test hồi quy BM25) gộp vào VLRA-35; T2 (test `chunk_document`) gộp vào VLRA-50 (dùng lại chunker khi thử chunk size); T3 (baseline eval) = VLRA-48/49.
+Đề xuất cũ: T1 (test hồi quy BM25) gộp vào VLRA-35; T2 (test `chunk_document`) chưa làm — không thuộc issue Jira nào đang mở, VLRA-50 dùng `rechunk` riêng, không sửa chunker; T3 (baseline eval) = VLRA-48/49.
 
 ### [x] T1. VLRA-35 Sửa lỗi và chuẩn hóa chunk_id/metadata Retrieval ↔ Reranker
 - **Lý do:** AC: Reranker nhận đủ chunk_id + metadata, không lỗi parse. 3 test Dense/embedding đang fail trên `develop`.
