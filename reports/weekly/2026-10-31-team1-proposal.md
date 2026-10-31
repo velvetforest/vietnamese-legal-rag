@@ -2,7 +2,7 @@
 
 Duyệt bằng: `duyệt 1,3` · `bỏ 2` · `sửa 2: <ý kiến>`. Nhánh đích: `pr_targets[team1]` (theo config).
 
-### [ ] T1. Sửa `BM25Retriever._search` trả list + test hồi quy Hybrid
+### [x] T1. Sửa `BM25Retriever._search` trả list + test hồi quy Hybrid
 - **Lý do:** Trên `main`, `_search` trả `dict` nhưng `retrieve()` bọc thêm lần nữa và `HybridRetriever` dùng `_search` như list → kết quả BM25/Hybrid sai (liên quan VLRA-35/37). Fix đang nằm ở nhánh chưa merge.
 - **File dự kiến đổi:** `team1_data/retrieval/bm25.py`, `tests/test_bm25_retrieval.py`, `tests/test_hybrid_retrieval.py`.
 - **Tiêu chí xong:** Test mới: `BM25Retriever._search` trả `list[dict]`; `retrieve()["results"]` là list phẳng; Hybrid RRF nhận đủ kết quả BM25. `pytest tests/test_bm25_retrieval.py tests/test_hybrid_retrieval.py tests/test_retrieval_edge_cases.py` pass, không có lỗi mới so với baseline.
