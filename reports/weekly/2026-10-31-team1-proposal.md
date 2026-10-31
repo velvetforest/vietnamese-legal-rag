@@ -28,7 +28,8 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Kết quả:** DONE VLRA-48 (commit `2bbb7a3`), test 461 → 466 passed.
 ### [x] T5. VLRA-49 Đánh giá BM25 / Dense / Hybrid (Recall@5/10/20, MRR@20) — phụ thuộc T4. **Ước lượng:** M
 - **Kết quả:** DONE VLRA-49 (commit `148a6ee`): Hybrid k=60 R@5 0.876 / MRR@20 0.829 > BM25 0.863 / 0.814 > Dense-LSA 0.852 / 0.757. Dense dùng LSA offline (HF 403).
-### [ ] T6. VLRA-50 Chunk size 384/512 × overlap 32/64 — phụ thuộc T4. **Ước lượng:** M
+### [x] T6. VLRA-50 Chunk size 384/512 × overlap 32/64 — phụ thuộc T4. **Ước lượng:** M
+- **Kết quả:** DONE VLRA-50 (commit `2f81fd6`): chênh lệch không đáng kể (chỉ 14 Khoản > 384 token); đề xuất giữ chunk theo Khoản, cắt 384/64 khi cần.
 ### [ ] T7. VLRA-51 RRF k (cơ sở k=60) — phụ thuộc T5. **Ước lượng:** S
 ### [ ] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
 ### [ ] T9. VLRA-53 Chọn cấu hình Retrieval v2 — phụ thuộc T5–T8. **Ước lượng:** S
