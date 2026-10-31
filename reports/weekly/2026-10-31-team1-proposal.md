@@ -17,10 +17,11 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Tiêu chí xong:** test E2E phần truy xuất pass offline; phần cần Team 3 chạy Frontend/Backend thật ghi rõ. **Ước lượng:** M
 - **Kết quả:** [!] làm một phần (commit `e83f22e`, 453 → 456 passed): luồng truy xuất E2E chạy ổn với corpus thật nhưng model là bản giả (HF bị chặn) và chưa chạy cùng Backend/Frontend Team 3 → không chuyển Done.
 
-### [ ] T3. VLRA-36 Golden Dataset Phase 1 (100–150 câu)
+### [x] T3. VLRA-36 Golden Dataset Phase 1 (100–150 câu)
 - **Lý do:** cần Dev Set cố định cho VLRA-48..53; hiện có 40 câu (Team 2, `team2_rag/data/golden/golden_phase1_30cai.json`).
 - **File dự kiến:** `team1_data/golden/golden_phase1.json` (mới, Team 1), test kiểm tra schema + mọi `gold_chunk_ids` tồn tại.
 - **Tiêu chí xong:** ≥ 100 câu, mỗi câu có `gold_chunk_ids` + Điều/Khoản nguồn + đáp án trích nguyên văn chunk; không bịa nội dung. **Ước lượng:** L
+- **Kết quả:** DONE VLRA-36 (commit `7a61fbd`): 110 câu, test 456 → 461 passed. 70 câu mới cần rà soát pháp lý cách hỏi.
 
 ### [ ] T4. VLRA-48 Pipeline đánh giá Retrieval
 - **File dự kiến:** `scripts/eval_retrieval.py` (Recall@10, MRR@20, adapter hybrid), `evaluation/README.md`, `tests/test_eval_retrieval.py`. **Ước lượng:** M
