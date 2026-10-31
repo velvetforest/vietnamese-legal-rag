@@ -75,4 +75,5 @@ Kiến trúc: `docs/ARCHITECTURE.md` · Quy ước code: `docs/CODING_CONVENTION
   (gồm cả Pha B tự động: task Team 1 trong Jira tự làm luôn, xong thì chuyển Jira sang Done, ghi chú giải pháp, không mở PR;
   vấn đề của Team 2/3 chỉ ghi vào báo cáo).
 - Tin nhắn bắt đầu bằng `duyệt` / `bỏ` / `sửa` khi STATE đang `waiting_approval` → chạy **Pha B** trong RUNBOOK.
+- Tin nhắn `merge` → chạy mục **Merge** trong RUNBOOK: tự mở PR (nếu chưa có) và tự merge trong fork khi đã qua cổng test, không hỏi lại.
 - Chỉ đọc những file RUNBOOK chỉ định để tiết kiệm token.

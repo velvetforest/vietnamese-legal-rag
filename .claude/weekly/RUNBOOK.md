@@ -95,7 +95,16 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 8. STATE: `status="done"`, `last_pr=<link PR>`, `pending_proposal=null`; commit + push nhánh báo cáo.
 9. Trả lời ≤ 8 dòng: link PR, task nào xong/không xong, test trước–sau.
 
+## Merge (chủ repo nhắn `merge`)
+Chỉ trong fork `fork_owner` (origin); KHÔNG merge/push vào repo gốc.
+1. Nhánh cần merge: nhánh code `claude/weekly-team1-*` mới nhất chưa merge → `develop` của fork (thiếu thì tạo từ `upstream/develop`);
+   nhánh quy trình `claude/weekly-workflow` → `main` của fork. Bỏ qua nhánh không có gì mới.
+2. Cổng test trên đầu nhánh: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
+   0 failed, không có skip/xfail mới do nhánh thêm vào. Không qua → KHÔNG merge, báo lỗi.
+3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`), rồi merge (kiểu `merge`, giữ lịch sử commit).
+4. Báo ≤ 6 dòng: PR + commit merge, test, link compare sang repo gốc để chủ repo tự mở PR lên đó nếu muốn.
+
 ## Cấm
-- Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ: Pha B tự động cho task Team 1, chỉ được chuyển Done issue Team 1 đã làm xong). Sửa code Team 2/3. Push thẳng vào `main`. Tự merge PR.
+- Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ: Pha B tự động cho task Team 1, chỉ được chuyển Done issue Team 1 đã làm xong). Sửa code Team 2/3. Push thẳng vào `main`. Tự merge PR khi chủ repo chưa nhắn `merge`.
 - Skip/xoá/đánh dấu xfail test để qua cổng test.
 - In secret (JIRA_API_TOKEN…) ra file hoặc chat.
