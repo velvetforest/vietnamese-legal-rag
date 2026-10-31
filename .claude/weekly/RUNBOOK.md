@@ -52,9 +52,11 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Phạm vi: task Team 1 trong proposal; chỉ sửa code thuộc `teams["Team 1"]` + test + docs liên quan. Không sửa code Team 2/3.
 - Sửa lỗi: kiểm tra lỗi còn trên nhánh đích `T = pr_targets["Team 1"]`; đã sửa sẵn trên `T` thì chỉ thêm test hồi quy nếu thiếu.
 - Làm theo Pha B bước 3–6 trên MỘT nhánh `claude/weekly-team1-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
-  KHÔNG ghi Jira (không tạo, không chuyển trạng thái). Cổng test giữ nguyên: không được có lỗi test mới.
+  Jira: KHÔNG tạo issue. Cổng test giữ nguyên: không được có lỗi test mới.
 - Task chạy eval/notebook: chỉ chạy nếu xong trong ~5 phút và không cần dữ liệu/khóa ngoài repo; kết quả ghi vào `docs/weekly-changes/D.md`.
 - Push nhánh lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở.
+- Sau khi push thành công: mỗi task `[x]` có key Jira → `python3 scripts/weekly/jira_tool.py done <KEY> "Claude tự làm: <tóm tắt 1 câu>. Nhánh: <link compare>. Ghi chú: docs/weekly-changes/D.md"`.
+  Chỉ chuyển Done khi task xong hẳn + cổng test qua + đã push; task `[!]`/`[-]` hoặc làm một phần thì KHÔNG chuyển. Ghi `DONE <KEY>` vào báo cáo.
 - Ghi chú giải pháp ở 2 nơi: `docs/weekly-changes/D.md` trên nhánh code, và mục `## 3. Team 1 đã tự làm` trong `D.md`
   (task · vấn đề · giải pháp · file · test trước–sau · commit). Đánh dấu `[x]` xong / `[!]` thất bại kèm lý do trong proposal.
 - STATE: `status="done"`, `pending_proposal=null`, `last_pr` = link compare. Commit + push nhánh báo cáo.
@@ -81,6 +83,6 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 9. Trả lời ≤ 8 dòng: link PR, task nào xong/không xong, test trước–sau.
 
 ## Cấm
-- Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ: Pha B tự động cho task Team 1, không ghi Jira). Sửa code Team 2/3. Push thẳng vào `main`. Tự merge PR.
+- Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ: Pha B tự động cho task Team 1, chỉ được chuyển Done issue Team 1 đã làm xong). Sửa code Team 2/3. Push thẳng vào `main`. Tự merge PR.
 - Skip/xoá/đánh dấu xfail test để qua cổng test.
 - In secret (JIRA_API_TOKEN…) ra file hoặc chat.

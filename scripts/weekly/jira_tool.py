@@ -9,6 +9,7 @@ Xác thực (chọn 1):
 
     python3 scripts/weekly/jira_tool.py snapshot            # 1 dòng / issue, theo team
     python3 scripts/weekly/jira_tool.py create tasks.json   # tạo issue SAU KHI người dùng duyệt
+    python3 scripts/weekly/jira_tool.py done VLRA-12 "ghi chú" [--dry-run]  # chuyển sang Done + comment
 
 tasks.json: [{"team": "Team 1", "summary": "...", "description": "..."}]
 """
@@ -135,8 +136,39 @@ def create(path: str) -> None:
         print(f"CREATED {res.get('key')} | {summary}")
 
 
+def done(key: str, note: str = "", dry_run: bool = False) -> None:
+    """Chuyển issue sang trạng thái nhóm Done (+ comment ghi chú, vd link nhánh)."""
+    if not re.fullmatch(rf'{re.escape(CFG["project_key"])}-\d+', key):
+        sys.exit(f"JIRA_ERROR key không thuộc project {CFG['project_key']}: {key}")
+    issue = call("GET", f"/rest/api/3/issue/{key}?fields=status")
+    cur = issue["fields"]["status"]
+    if cur.get("statusCategory", {}).get("key") == "done":
+        print(f"ALREADY_DONE {key} ({cur.get('name')})")
+        return
+    trans = call("GET", f"/rest/api/3/issue/{key}/transitions").get("transitions", [])
+    t = next((t for t in trans if t.get("to", {}).get("statusCategory", {}).get("key") == "done"), None)
+    if not t:
+        sys.exit(f"JIRA_ERROR {key}: không có transition sang Done từ '{cur.get('name')}'")
+    if dry_run:
+        print(f"DRY_RUN {key}: {cur.get('name')} -> {t['to']['name']} (transition {t['id']})")
+        return
+    if note:
+        call("POST", f"/rest/api/3/issue/{key}/comment", {"body": {"type": "doc", "version": 1, "content": [
+            {"type": "paragraph", "content": [{"type": "text", "text": note}]}]}})
+    call("POST", f"/rest/api/3/issue/{key}/transitions", {"transition": {"id": t["id"]}})
+    print(f"DONE {key}: {cur.get('name')} -> {t['to']['name']}")
+
+
 if __name__ == "__main__":
-    if len(sys.argv) < 2 or sys.argv[1] not in ("snapshot", "create"):
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ""
+    if cmd not in ("snapshot", "create", "done") or (cmd in ("create", "done") and len(sys.argv) < 3):
         sys.exit(__doc__)
     if env_ok():
-        snapshot() if sys.argv[1] == "snapshot" else create(sys.argv[2])
+        if cmd == "snapshot":
+            snapshot()
+        elif cmd == "create":
+            create(sys.argv[2])
+        else:
+            args = sys.argv[3:]
+            dry = "--dry-run" in args
+            done(sys.argv[2], " ".join(a for a in args if a != "--dry-run"), dry)
