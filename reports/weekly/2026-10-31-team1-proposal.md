@@ -32,5 +32,6 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Kết quả:** DONE VLRA-50 (commit `2f81fd6`): chênh lệch không đáng kể (chỉ 14 Khoản > 384 token); đề xuất giữ chunk theo Khoản, cắt 384/64 khi cần.
 ### [x] T7. VLRA-51 RRF k (cơ sở k=60) — phụ thuộc T5. **Ước lượng:** S
 - **Kết quả:** DONE VLRA-51 (commit `f60c9cf`): k ≥ 20 ổn định, giữ k = 60.
-### [ ] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
+### [!] T8. VLRA-52 So sánh mô hình Embedding — phụ thuộc T5; HuggingFace bị chặn (403) trong môi trường chạy → có thể chỉ làm được một phần. **Ước lượng:** M
+- **Kết quả:** [!] làm một phần (commit `4f66fcc`): chỉ so được embedder offline (hash, LSA 128–768; LSA 384 cân bằng nhất). Model thật không tải được (HuggingFace 403) → không chuyển Done.
 ### [ ] T9. VLRA-53 Chọn cấu hình Retrieval v2 — phụ thuộc T5–T8. **Ước lượng:** S
