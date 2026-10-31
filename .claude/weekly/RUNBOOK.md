@@ -62,7 +62,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 ## Pha B tự động – làm task Team 1 (không cần duyệt)
 - Phạm vi: task Team 1 trong proposal; chỉ sửa code thuộc `teams["Team 1"]` + test + docs liên quan. Không sửa code Team 2/3.
 - Sửa lỗi: kiểm tra lỗi còn trên nhánh đích `T = pr_targets["Team 1"]`; đã sửa sẵn trên `T` thì chỉ thêm test hồi quy nếu thiếu.
-- Làm theo Pha B bước 3–6 trên MỘT nhánh `claude/weekly-team1-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
+- Làm theo Pha B bước 3–6 (kể cả quy tắc phần thân commit) trên MỘT nhánh `claude/weekly-team1-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
   Jira: KHÔNG tạo issue. Cổng test giữ nguyên: không được có lỗi test mới.
 - Task chạy eval/notebook: chỉ chạy nếu xong trong ~5 phút và không cần dữ liệu/khóa ngoài repo; kết quả ghi vào `docs/weekly-changes/D.md`.
 - Push nhánh lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở.
@@ -85,6 +85,17 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
    Baseline test trên đích: `git fetch -q upstream T && git checkout -B claude/weekly-team1-D upstream/T`, chạy `test_setup` (1 lần) rồi
    `<test_cmd> -rf 2>&1 | grep -E '^(FAILED|ERROR)' | sed 's/ - .*//' | sort > /tmp/base_fail.txt`.
 4. Làm từng task, commit nhỏ theo `docs/CODING_CONVENTIONS.md`; code mới phải có test.
+   Mỗi commit PHẢI có phần thân (sau dòng tiêu đề, cách 1 dòng trống), không chỉ dòng tiêu đề:
+   ```
+   fix(team1): chặn point trùng khi nối Dense [VLRA-35]
+
+   Vấn đề: <lỗi/yêu cầu, 1–2 câu>
+   Thay đổi:
+   - <đường/dẫn/file.py>: <đổi gì, vì sao>
+   - ...
+   Test: <trước> → <sau> (vd 468 → 469 passed, 0 failed)
+   ```
+   Dòng `Co-Authored-By`/`Claude-Session` chỉ là ghi công, không thay cho phần thân.
 5. Chạy lại test → `/tmp/after_fail.txt`; `comm -13 /tmp/base_fail.txt /tmp/after_fail.txt` phải RỖNG.
    Được tự sửa tối đa 2 lần; vẫn có lỗi mới → KHÔNG push, ghi lý do vào STATE và báo chủ repo.
 6. Viết `docs/weekly-changes/D.md` trên nhánh code: mỗi task → Đã đổi gì · Vì sao · File · Test chứng minh · Kết quả test (passed/failed trước–sau).
