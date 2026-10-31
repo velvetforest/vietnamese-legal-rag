@@ -11,10 +11,11 @@ Nhánh code: `claude/weekly-team1-2026-10-31` (đích `develop`), không mở PR
 - **Tiêu chí xong:** toàn corpus + đầu ra BM25/Hybrid qua `team2_rag.reranker._validate`; 3 test fail → pass. **Ước lượng:** S
 - **Kết quả:** DONE VLRA-35 (commit `2166789`, `31e64cb`), test 447/3 fail → 453/0 fail.
 
-### [ ] T2. VLRA-37 Phối hợp kiểm thử luồng truy xuất trong E2E MVP
+### [!] T2. VLRA-37 Phối hợp kiểm thử luồng truy xuất trong E2E MVP
 - **Lý do:** cần luồng truy xuất ổn định khi Backend gọi API.
 - **File dự kiến:** `tests/test_retrieval_e2e.py` (mới): build BM25 trên corpus thật → Hybrid → reranker validator → kiểm tra API contract `contracts/v0.1`.
 - **Tiêu chí xong:** test E2E phần truy xuất pass offline; phần cần Team 3 chạy Frontend/Backend thật ghi rõ. **Ước lượng:** M
+- **Kết quả:** [!] làm một phần (commit `e83f22e`, 453 → 456 passed): luồng truy xuất E2E chạy ổn với corpus thật nhưng model là bản giả (HF bị chặn) và chưa chạy cùng Backend/Frontend Team 3 → không chuyển Done.
 
 ### [ ] T3. VLRA-36 Golden Dataset Phase 1 (100–150 câu)
 - **Lý do:** cần Dev Set cố định cho VLRA-48..53; hiện có 40 câu (Team 2, `team2_rag/data/golden/golden_phase1_30cai.json`).
