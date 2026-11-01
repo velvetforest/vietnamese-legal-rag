@@ -13,7 +13,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Chỉ đọc output của script. Diff đầy đủ chỉ mở cho ≤ 5 file quan trọng, mỗi file `| head -200`.
 - Không quét toàn repo, không đọc lại báo cáo cũ trừ file được chỉ định.
 - Tin nhắn trả lời chủ repo ≤ 10 dòng; chi tiết nằm trong file.
-- Viết tiếng Việt. Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
+- Báo cáo, Jira, trả lời chủ repo: viết tiếng Việt. **Nội dung trên GitHub (tiêu đề + mô tả PR, comment, review, issue) chỉ viết tiếng Anh, không bao giờ dùng tiếng Việt.** Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
 
 ## Lịch hằng tuần
 - **Chiều Thứ 5 – Xem chia việc:** Pha A bước 1–4 + mục `## 5. Đề xuất chia lại việc` trong `D.md`
@@ -99,7 +99,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 5. Chạy lại test → `/tmp/after_fail.txt`; `comm -13 /tmp/base_fail.txt /tmp/after_fail.txt` phải RỖNG.
    Được tự sửa tối đa 2 lần; vẫn có lỗi mới → KHÔNG push, ghi lý do vào STATE và báo chủ repo.
 6. Viết `docs/weekly-changes/D.md` trên nhánh code: mỗi task → Đã đổi gì · Vì sao · File · Test chứng minh · Kết quả test (passed/failed trước–sau).
-7. `git push -u origin claude/weekly-team1-D` (lên fork). Mở PR **từ fork sang nhánh team `T` của repo gốc** (không phải `main`) theo `.github/pull_request_template.md`;
+7. `git push -u origin claude/weekly-team1-D` (lên fork). Mở PR **từ fork sang nhánh team `T` của repo gốc** (không phải `main`) theo `.github/pull_request_template.md` (tiêu đề + mô tả bằng tiếng Anh);
    nếu công cụ không có quyền tạo PR trên repo gốc thì đưa chủ repo link 1-click:
    `https://github.com/<owner gốc>/<repo>/compare/T...<fork_owner>:<repo>:claude/weekly-team1-D?expand=1`. KHÔNG merge.
    (Nếu môi trường chỉ cho push một nhánh chỉ định thì dùng nhánh đó và ghi rõ.)
@@ -112,7 +112,7 @@ Chỉ trong fork `fork_owner` (origin); KHÔNG merge/push vào repo gốc.
    nhánh quy trình `claude/weekly-workflow` → `main` của fork. Bỏ qua nhánh không có gì mới.
 2. Cổng test trên đầu nhánh: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
    0 failed, không có skip/xfail mới do nhánh thêm vào. Không qua → KHÔNG merge, báo lỗi.
-3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`), rồi merge (kiểu `merge`, giữ lịch sử commit).
+3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`, tiêu đề + mô tả bằng tiếng Anh), rồi merge (kiểu `merge`, giữ lịch sử commit).
 4. Báo ≤ 6 dòng: PR + commit merge, test, link compare sang repo gốc để chủ repo tự mở PR lên đó nếu muốn.
 
 ## Cấm
