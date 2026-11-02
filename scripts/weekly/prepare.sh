@@ -9,7 +9,7 @@ UP=$(cfg upstream_remote); UPURL=$(cfg upstream_url)
 R=${WEEKLY_DIR:-../weekly-reports}
 
 [ "$(git rev-parse --is-shallow-repository)" = true ] && git fetch -q --unshallow origin 2>/dev/null || true
-# Repo gốc chỉ đọc (fetch); mọi thứ ghi đều push lên origin = fork của chủ repo.
+# origin = repo gốc: fetch nhánh chính; nhánh báo cáo/nhánh code push lên origin, không push main/develop.
 git remote get-url "$UP" >/dev/null 2>&1 || git remote add "$UP" "$UPURL"
 git fetch -q "$UP" "$BB"
 git fetch -q origin "$RB" 2>/dev/null || true

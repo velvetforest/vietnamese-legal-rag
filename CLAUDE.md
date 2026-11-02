@@ -76,8 +76,8 @@ Kiến trúc: `docs/ARCHITECTURE.md` · Quy ước code: `docs/CODING_CONVENTION
 
 ## Lệnh tắt của chủ repo
 - Tin nhắn chỉ gồm `s` (hoặc `start`) → chạy **Pha A** trong `.claude/weekly/RUNBOOK.md` ngay, không hỏi lại
-  (gồm cả Pha B tự động: task Team 1 trong Jira tự làm luôn, xong thì chuyển Jira sang Done, ghi chú giải pháp, không mở PR;
+  (gồm cả Pha B tự động: task Team 1 trong Jira tự làm luôn, xong thì chuyển Jira sang Done, ghi chú giải pháp, mở PR vào nhánh team trên repo gốc (không merge);
   vấn đề của Team 2/3 chỉ ghi vào báo cáo).
 - Tin nhắn bắt đầu bằng `duyệt` / `bỏ` / `sửa` khi STATE đang `waiting_approval` → chạy **Pha B** trong RUNBOOK.
-- Tin nhắn `merge` → chạy mục **Merge** trong RUNBOOK: tự mở PR (nếu chưa có) và tự merge trong fork khi đã qua cổng test, không hỏi lại.
+- Tin nhắn `merge` → chạy mục **Merge** trong RUNBOOK: tự merge PR weekly trên repo gốc khi đã qua cổng test, không hỏi lại.
 - Chỉ đọc những file RUNBOOK chỉ định để tiết kiệm token.

@@ -1,8 +1,7 @@
 {
   "base_branch": "main",
   "upstream_url": "https://github.com/Banh-Van-Hiep/vietnamese-legal-rag.git",
-  "upstream_remote": "upstream",
-  "fork_owner": "velvetforest",
+  "upstream_remote": "origin",
   "reports_branch": "weekly-reports",
   "default_since_days": 7,
   "teams": {

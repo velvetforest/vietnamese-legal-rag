@@ -4,9 +4,9 @@ Kích hoạt: chủ repo nhắn **`s`** (bất kỳ lúc nào) hoặc lịch t�
 Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) và chủ repo nhắn `duyệt …` / `bỏ …` / `sửa …` → **Pha B**.
 
 ## Quyền truy cập
-- Repo gốc (`upstream_url`, remote `upstream`): **chỉ fetch để đọc**, không bao giờ push.
-- Mọi thứ ghi (nhánh báo cáo, nhánh code) push lên `origin` = fork của `fork_owner`.
-- Chỉ "chạm" repo gốc khi mở PR từ fork sang (Pha B bước 7).
+- Làm thẳng trên repo gốc (`origin` = `upstream_url`), không qua fork.
+- Được push nhánh mới (`feature/team1/weekly-D`, `weekly-reports`) và mở PR vào nhánh đích `T` của repo gốc.
+- KHÔNG push thẳng vào `main`/`develop`/nhánh team; chỉ merge PR khi chủ repo nhắn `merge`.
 
 ## Nguyên tắc (tiết kiệm token, không phụ thuộc trí nhớ)
 - Trí nhớ duy nhất là file: `STATE.json` + các file trong `$WEEKLY_DIR/reports/weekly/`. Không dựa vào lịch sử chat.
@@ -62,15 +62,15 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 ## Pha B tự động – làm task Team 1 (không cần duyệt)
 - Phạm vi: task Team 1 trong proposal; chỉ sửa code thuộc `teams["Team 1"]` + test + docs liên quan. Không sửa code Team 2/3.
 - Sửa lỗi: kiểm tra lỗi còn trên nhánh đích `T = pr_targets["Team 1"]`; đã sửa sẵn trên `T` thì chỉ thêm test hồi quy nếu thiếu.
-- Làm theo Pha B bước 3–6 (kể cả quy tắc phần thân commit) trên MỘT nhánh `claude/weekly-team1-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
+- Làm theo Pha B bước 3–6 (kể cả quy tắc phần thân commit) trên MỘT nhánh `feature/team1/weekly-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
   Jira: KHÔNG tạo issue. Cổng test giữ nguyên: không được có lỗi test mới.
 - Task chạy eval/notebook: chỉ chạy nếu xong trong ~5 phút và không cần dữ liệu/khóa ngoài repo; kết quả ghi vào `docs/weekly-changes/D.md`.
-- Push nhánh lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở.
+- Push nhánh lên repo gốc và mở PR vào `T` (Pha B bước 7) ngay khi có task đầu tiên xong; các task sau push thêm vào cùng PR. KHÔNG merge.
 - Sau khi push thành công: mỗi task `[x]` có key Jira → `python3 scripts/weekly/jira_tool.py done <KEY> "Claude tự làm: <tóm tắt 1 câu>. Nhánh: <link compare>. Ghi chú: docs/weekly-changes/D.md"`.
   Chỉ chuyển Done khi task xong hẳn + cổng test qua + đã push; task `[!]`/`[-]` hoặc làm một phần thì KHÔNG chuyển. Ghi `DONE <KEY>` vào báo cáo.
 - Ghi chú giải pháp ở 2 nơi: `docs/weekly-changes/D.md` trên nhánh code, và mục `## 3. Team 1 đã tự làm` trong `D.md`
   (task · vấn đề · giải pháp · file · test trước–sau · commit). Đánh dấu `[x]` xong / `[!]` thất bại kèm lý do trong proposal.
-- STATE: `status="done"`, `pending_proposal=null`, `last_pr` = link compare. Commit + push nhánh báo cáo.
+- STATE: `status="done"`, `pending_proposal=null`, `last_pr` = link PR. Commit + push nhánh báo cáo.
 - Làm lần lượt đến khi hết danh sách. Sau mỗi task: commit + push nhánh code, `done` Jira, cập nhật proposal/báo cáo + push nhánh báo cáo
   (mất phiên giữa chừng vẫn giữ được kết quả).
 - Giới hạn: `max_tasks_per_run` task mỗi lần chạy, ~250 lần gọi công cụ mỗi phiên; mỗi task tự sửa ≤ 2 lần, quá thì `[!]` và chuyển task sau;
@@ -82,7 +82,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 2. Jira: ghi các task được duyệt vào `/tmp/weekly-tasks.json` rồi `python3 scripts/weekly/jira_tool.py create /tmp/weekly-tasks.json`
    (nếu `JIRA_SKIPPED` thì ghi chú, vẫn làm tiếp).
 3. Nhánh đích `T = pr_targets[team]` (vd Team 1 → `develop`, Team 2 → `feature/team2-rag`).
-   Baseline test trên đích: `git fetch -q upstream T && git checkout -B claude/weekly-team1-D upstream/T`, chạy `test_setup` (1 lần) rồi
+   Baseline test trên đích: `git fetch -q origin T && git checkout -B feature/team1/weekly-D origin/T`, chạy `test_setup` (1 lần) rồi
    `<test_cmd> -rf 2>&1 | grep -E '^(FAILED|ERROR)' | sed 's/ - .*//' | sort > /tmp/base_fail.txt`.
 4. Làm từng task, commit nhỏ theo `docs/CODING_CONVENTIONS.md`; code mới phải có test.
    Mỗi commit PHẢI có phần thân (sau dòng tiêu đề, cách 1 dòng trống), không chỉ dòng tiêu đề:
@@ -99,21 +99,19 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 5. Chạy lại test → `/tmp/after_fail.txt`; `comm -13 /tmp/base_fail.txt /tmp/after_fail.txt` phải RỖNG.
    Được tự sửa tối đa 2 lần; vẫn có lỗi mới → KHÔNG push, ghi lý do vào STATE và báo chủ repo.
 6. Viết `docs/weekly-changes/D.md` trên nhánh code: mỗi task → Đã đổi gì · Vì sao · File · Test chứng minh · Kết quả test (passed/failed trước–sau).
-7. `git push -u origin claude/weekly-team1-D` (lên fork). Mở PR **từ fork sang nhánh team `T` của repo gốc** (không phải `main`) theo `.github/pull_request_template.md` (tiêu đề + mô tả bằng tiếng Anh);
-   nếu công cụ không có quyền tạo PR trên repo gốc thì đưa chủ repo link 1-click:
-   `https://github.com/<owner gốc>/<repo>/compare/T...<fork_owner>:<repo>:claude/weekly-team1-D?expand=1`. KHÔNG merge.
+7. `git push -u origin feature/team1/weekly-D` (repo gốc). Mở PR vào nhánh `T` của repo gốc (không phải `main`) theo `.github/pull_request_template.md` (tiêu đề + mô tả bằng tiếng Anh).
+   Không tạo được PR (lỗi quyền) → đưa link `https://github.com/<owner>/<repo>/compare/T...feature/team1/weekly-D?expand=1` và ghi lỗi. KHÔNG merge.
    (Nếu môi trường chỉ cho push một nhánh chỉ định thì dùng nhánh đó và ghi rõ.)
 8. STATE: `status="done"`, `last_pr=<link PR>`, `pending_proposal=null`; commit + push nhánh báo cáo.
 9. Trả lời ≤ 8 dòng: link PR, task nào xong/không xong, test trước–sau.
 
 ## Merge (chủ repo nhắn `merge`)
-Chỉ trong fork `fork_owner` (origin); KHÔNG merge/push vào repo gốc.
-1. Nhánh cần merge: nhánh code `claude/weekly-team1-*` mới nhất chưa merge → `develop` của fork (thiếu thì tạo từ `upstream/develop`);
-   nhánh quy trình `claude/weekly-workflow` → `main` của fork. Bỏ qua nhánh không có gì mới.
-2. Cổng test trên đầu nhánh: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
-   0 failed, không có skip/xfail mới do nhánh thêm vào. Không qua → KHÔNG merge, báo lỗi.
-3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`, tiêu đề + mô tả bằng tiếng Anh), rồi merge (kiểu `merge`, giữ lịch sử commit).
-4. Báo ≤ 6 dòng: PR + commit merge, test, link compare sang repo gốc để chủ repo tự mở PR lên đó nếu muốn.
+Trên repo gốc (origin).
+1. PR cần merge: các PR đang mở từ nhánh `feature/team1/*` (và PR quy trình `chore/weekly-*` nếu có). Bỏ qua PR không có gì mới.
+2. Cổng test trên đầu nhánh đã gộp với nhánh đích mới nhất: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
+   0 failed, không có skip/xfail mới do nhánh thêm vào. Xung đột hoặc không qua → KHÔNG merge, báo lỗi.
+3. Merge PR (kiểu `merge`, commit/bình luận trên GitHub bằng tiếng Anh, giữ lịch sử commit, truyền expectedHeadSha). Bị branch protection chặn (cần review/CI) → để PR mở, báo lý do, KHÔNG lách.
+4. Báo ≤ 6 dòng: PR + commit merge, test trước–sau.
 
 ## Cấm
 - Ghi Jira hoặc sửa code trước khi được duyệt (ngoại lệ: Pha B tự động cho task Team 1, chỉ được chuyển Done issue Team 1 đã làm xong). Sửa code Team 2/3. Push thẳng vào `main`. Tự merge PR khi chủ repo chưa nhắn `merge`.
