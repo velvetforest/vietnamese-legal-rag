@@ -70,6 +70,10 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 Kiến trúc: `docs/ARCHITECTURE.md` · Quy ước code: `docs/CODING_CONVENTIONS.md` (chỉ đọc khi cần).
 
+## Cách trả lời chủ repo
+- Ngắn gọn, ưu tiên gạch đầu dòng; không dài dòng, không lặp lại điều đã nói.
+- Chỉ nêu: kết quả, vấn đề còn lại, việc cần chủ repo quyết (kèm lựa chọn).
+
 ## Lệnh tắt của chủ repo
 - Tin nhắn chỉ gồm `s` (hoặc `start`) → chạy **Pha A** trong `.claude/weekly/RUNBOOK.md` ngay, không hỏi lại
   (gồm cả Pha B tự động: task Team 1 trong Jira tự làm luôn, xong thì chuyển Jira sang Done, ghi chú giải pháp, không mở PR;
