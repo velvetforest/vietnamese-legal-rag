@@ -13,7 +13,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 - Chỉ đọc output của script. Diff đầy đủ chỉ mở cho ≤ 5 file quan trọng, mỗi file `| head -200`.
 - Không quét toàn repo, không đọc lại báo cáo cũ trừ file được chỉ định.
 - Tin nhắn trả lời chủ repo ≤ 10 dòng; chi tiết nằm trong file.
-- Viết tiếng Việt. Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
+- Báo cáo, Jira, tài liệu trong repo, trả lời chủ repo: viết tiếng Việt. **Nội dung trên GitHub (commit message, tiêu đề + mô tả PR, comment, review, issue) chỉ viết tiếng Anh.** Ngày `D` = ngày hôm nay dạng `YYYY-MM-DD`.
 
 ## Lịch hằng tuần
 - **Chiều Thứ 5 – Xem chia việc:** Pha A bước 1–4 + mục `## 5. Đề xuất chia lại việc` trong `D.md`
@@ -89,17 +89,10 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
    Baseline test trên đích: `git fetch -q upstream T && git checkout -B feature/team1-data/week-<NN>-<ten-ngan> upstream/T`, chạy `test_setup` (1 lần) rồi
    `<test_cmd> -rf 2>&1 | grep -E '^(FAILED|ERROR)' | sed 's/ - .*//' | sort > /tmp/base_fail.txt`.
 4. Làm từng task, commit nhỏ theo `docs/CODING_CONVENTIONS.md`; code mới phải có test.
-   Mỗi commit PHẢI có phần thân (sau dòng tiêu đề, cách 1 dòng trống), không chỉ dòng tiêu đề:
-   ```
-   fix(team1): chặn point trùng khi nối Dense [VLRA-35]
-
-   Vấn đề: <lỗi/yêu cầu, 1–2 câu>
-   Thay đổi:
-   - <đường/dẫn/file.py>: <đổi gì, vì sao>
-   - ...
-   Test: <trước> → <sau> (vd 468 → 469 passed, 0 failed)
-   ```
-   Dòng `Co-Authored-By`/`Claude-Session` chỉ là ghi công, không thay cho phần thân.
+   Commit message ngắn gọn, tiếng Anh: một dòng tiêu đề Conventional Commits, vd
+   `fix(team1): reject duplicate points when connecting Dense [VLRA-35]`; thân tối đa 1–2 câu nếu thật cần.
+   KHÔNG đưa các mục Description/Changes/Testing/Checklist hay "Vấn đề/Thay đổi/Test" vào commit
+   (PR một commit sẽ bị GitHub chép thân commit vào mô tả PR). Chi tiết thay đổi + test trước–sau nằm trong mô tả PR.
 5. Chạy lại test → `/tmp/after_fail.txt`; `comm -13 /tmp/base_fail.txt /tmp/after_fail.txt` phải RỖNG.
    Được tự sửa tối đa 2 lần; vẫn có lỗi mới → KHÔNG push, ghi lý do vào STATE và báo chủ repo.
 6. Ghi kết quả vào mục `## 6. Kết Quả Thực Hiện` của `team1_data/docs_1/week<NN>/tasks.md` trên nhánh code
@@ -117,7 +110,7 @@ Chỉ trong fork `fork_owner` (origin); KHÔNG merge/push vào repo gốc.
    nhánh quy trình `claude/weekly-workflow` → `main` của fork. Bỏ qua nhánh không có gì mới.
 2. Cổng test trên đầu nhánh: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
    0 failed, không có skip/xfail mới do nhánh thêm vào. Không qua → KHÔNG merge, báo lỗi.
-3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`), rồi merge (kiểu `merge`, giữ lịch sử commit).
+3. Chưa có PR thì mở PR trong fork (theo `.github/pull_request_template.md`, tiếng Anh), rồi merge (kiểu `merge`, giữ lịch sử commit).
 4. Báo ≤ 6 dòng: PR + commit merge, test, link compare sang repo gốc để chủ repo tự mở PR lên đó nếu muốn.
 
 ## Cấm
