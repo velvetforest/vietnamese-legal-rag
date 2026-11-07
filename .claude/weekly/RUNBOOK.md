@@ -62,13 +62,17 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 ## Pha B tự động – làm task Team 1 (không cần duyệt)
 - Phạm vi: task Team 1 trong proposal; chỉ sửa code thuộc `teams["Team 1"]` + test + docs liên quan. Không sửa code Team 2/3.
 - Sửa lỗi: kiểm tra lỗi còn trên nhánh đích `T = pr_targets["Team 1"]`; đã sửa sẵn trên `T` thì chỉ thêm test hồi quy nếu thiếu.
-- Làm theo Pha B bước 3–6 (kể cả quy tắc phần thân commit) trên MỘT nhánh `claude/weekly-team1-D`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
+- Làm theo Pha B bước 3–6 (kể cả quy tắc phần thân commit) trên MỘT nhánh `feature/team1-data/week-<NN>-<ten-ngan>`, mỗi task ≥ 1 commit (`<type>(team1): ... [KEY]`).
   Jira: KHÔNG tạo issue. Cổng test giữ nguyên: không được có lỗi test mới.
-- Task chạy eval/notebook: chỉ chạy nếu xong trong ~5 phút và không cần dữ liệu/khóa ngoài repo; kết quả ghi vào `docs/weekly-changes/D.md`.
-- Push nhánh lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở.
-- Sau khi push thành công: mỗi task `[x]` có key Jira → `python3 scripts/weekly/jira_tool.py done <KEY> "Claude tự làm: <tóm tắt 1 câu>. Nhánh: <link compare>. Ghi chú: docs/weekly-changes/D.md"`.
+- Task chạy eval/notebook: chỉ chạy nếu xong trong ~5 phút và không cần dữ liệu/khóa ngoài repo; kết quả ghi vào `team1_data/docs_1/week<NN>/tasks.md` (mục 6).
+- Push nhánh lên fork, **KHÔNG mở PR**; đưa link compare (Pha B bước 7) để chủ repo tự xem và mở,
+  kèm mô tả PR soạn sẵn theo đúng các mục của `.github/pull_request_template.md`
+  (Description · Related issue · Team · Changes · Testing · Checklist), không dùng thân commit làm mô tả PR.
+- Tài liệu: KHÔNG tạo file `.md` mới trong `docs/` cho kết quả/báo cáo tuần (`docs/` chỉ chứa đặc tả dùng chung).
+  Kết quả tuần ghi vào `team1_data/docs_1/week<NN>/tasks.md`; `<NN>` = tuần của kế hoạch Team 1 đang áp dụng.
+- Sau khi push thành công: mỗi task `[x]` có key Jira → `python3 scripts/weekly/jira_tool.py done <KEY> "Claude tự làm: <tóm tắt 1 câu>. Nhánh: <link compare>. Ghi chú: team1_data/docs_1/week<NN>/tasks.md mục 6"`.
   Chỉ chuyển Done khi task xong hẳn + cổng test qua + đã push; task `[!]`/`[-]` hoặc làm một phần thì KHÔNG chuyển. Ghi `DONE <KEY>` vào báo cáo.
-- Ghi chú giải pháp ở 2 nơi: `docs/weekly-changes/D.md` trên nhánh code, và mục `## 3. Team 1 đã tự làm` trong `D.md`
+- Ghi chú giải pháp ở 2 nơi: mục `## 6. Kết Quả Thực Hiện` của `team1_data/docs_1/week<NN>/tasks.md` trên nhánh code, và mục `## 3. Team 1 đã tự làm` trong `D.md`
   (task · vấn đề · giải pháp · file · test trước–sau · commit). Đánh dấu `[x]` xong / `[!]` thất bại kèm lý do trong proposal.
 - STATE: `status="done"`, `pending_proposal=null`, `last_pr` = link compare. Commit + push nhánh báo cáo.
 - Làm lần lượt đến khi hết danh sách. Sau mỗi task: commit + push nhánh code, `done` Jira, cập nhật proposal/báo cáo + push nhánh báo cáo
@@ -82,7 +86,7 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
 2. Jira: ghi các task được duyệt vào `/tmp/weekly-tasks.json` rồi `python3 scripts/weekly/jira_tool.py create /tmp/weekly-tasks.json`
    (nếu `JIRA_SKIPPED` thì ghi chú, vẫn làm tiếp).
 3. Nhánh đích `T = pr_targets[team]` (vd Team 1 → `develop`, Team 2 → `feature/team2-rag`).
-   Baseline test trên đích: `git fetch -q upstream T && git checkout -B claude/weekly-team1-D upstream/T`, chạy `test_setup` (1 lần) rồi
+   Baseline test trên đích: `git fetch -q upstream T && git checkout -B feature/team1-data/week-<NN>-<ten-ngan> upstream/T`, chạy `test_setup` (1 lần) rồi
    `<test_cmd> -rf 2>&1 | grep -E '^(FAILED|ERROR)' | sed 's/ - .*//' | sort > /tmp/base_fail.txt`.
 4. Làm từng task, commit nhỏ theo `docs/CODING_CONVENTIONS.md`; code mới phải có test.
    Mỗi commit PHẢI có phần thân (sau dòng tiêu đề, cách 1 dòng trống), không chỉ dòng tiêu đề:
@@ -98,17 +102,18 @@ Khi đang có đề xuất chờ duyệt (`STATE.status == "waiting_approval"`) 
    Dòng `Co-Authored-By`/`Claude-Session` chỉ là ghi công, không thay cho phần thân.
 5. Chạy lại test → `/tmp/after_fail.txt`; `comm -13 /tmp/base_fail.txt /tmp/after_fail.txt` phải RỖNG.
    Được tự sửa tối đa 2 lần; vẫn có lỗi mới → KHÔNG push, ghi lý do vào STATE và báo chủ repo.
-6. Viết `docs/weekly-changes/D.md` trên nhánh code: mỗi task → Đã đổi gì · Vì sao · File · Test chứng minh · Kết quả test (passed/failed trước–sau).
-7. `git push -u origin claude/weekly-team1-D` (lên fork). Mở PR **từ fork sang nhánh team `T` của repo gốc** (không phải `main`) theo `.github/pull_request_template.md`;
+6. Ghi kết quả vào mục `## 6. Kết Quả Thực Hiện` của `team1_data/docs_1/week<NN>/tasks.md` trên nhánh code
+   (tuần chưa có file thì tạo theo cấu trúc bắt buộc trong `docs/CODING_CONVENTIONS.md`): mỗi task → Đã đổi gì · Vì sao · File · Test chứng minh · Kết quả test (passed/failed trước–sau).
+7. `git push -u origin feature/team1-data/week-<NN>-<ten-ngan>` (lên fork). Mở PR **từ fork sang nhánh team `T` của repo gốc** (không phải `main`) theo `.github/pull_request_template.md`;
    nếu công cụ không có quyền tạo PR trên repo gốc thì đưa chủ repo link 1-click:
-   `https://github.com/<owner gốc>/<repo>/compare/T...<fork_owner>:<repo>:claude/weekly-team1-D?expand=1`. KHÔNG merge.
+   `https://github.com/<owner gốc>/<repo>/compare/T...<fork_owner>:<repo>:feature/team1-data/week-<NN>-<ten-ngan>?expand=1`. KHÔNG merge.
    (Nếu môi trường chỉ cho push một nhánh chỉ định thì dùng nhánh đó và ghi rõ.)
 8. STATE: `status="done"`, `last_pr=<link PR>`, `pending_proposal=null`; commit + push nhánh báo cáo.
 9. Trả lời ≤ 8 dòng: link PR, task nào xong/không xong, test trước–sau.
 
 ## Merge (chủ repo nhắn `merge`)
 Chỉ trong fork `fork_owner` (origin); KHÔNG merge/push vào repo gốc.
-1. Nhánh cần merge: nhánh code `claude/weekly-team1-*` mới nhất chưa merge → `develop` của fork (thiếu thì tạo từ `upstream/develop`);
+1. Nhánh cần merge: nhánh code `feature/team1-data/week-*` mới nhất chưa merge → `develop` của fork (thiếu thì tạo từ `upstream/develop`);
    nhánh quy trình `claude/weekly-workflow` → `main` của fork. Bỏ qua nhánh không có gì mới.
 2. Cổng test trên đầu nhánh: `test_setup` + cài `bm25s underthesea jsonschema scikit-learn`, chạy `test_cmd -rs`:
    0 failed, không có skip/xfail mới do nhánh thêm vào. Không qua → KHÔNG merge, báo lỗi.
